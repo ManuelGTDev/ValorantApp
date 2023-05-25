@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/almost_black"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:src="@drawable/valorant_icon2"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </ImageView>
+
+    <TextView
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tactical 5v5 Shooter"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:backgroundTint="@color/azul_muy_oscuro"
+        android:id="@+id/agentsCardView"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        card_view:cardCornerRadius="20dp"
+        android:layout_margin="10dp"
+        card_view:layout_constraintVertical_bias="0.45"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:rotation="-50"
+            android:gravity="right">
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/jett_icon"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right">
+        </ImageView>
+
+        <TextView
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Agents"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/weaponsCardView"
+        android:backgroundTint="@color/azul_muy_oscuro"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="170dp"
+        card_view:cardCornerRadius="20dp"
+        card_view:layout_constraintVertical_bias="0.85"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:rotation="-50"
+            android:gravity="right">
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/grenade_icon"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right">
+        </ImageView>
+
+        <TextView
+            android:fontFamily="sans-serif-condensed-medium"
+            android:id="@+id/text2"
+            android:text="Weapons"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
