@@ -13,11 +13,13 @@ import com.mgtapps.valorantapp.databinding.RecyclerWeaponsItemBinding
 import com.mgtapps.valorantapp.ui.view.WeaponDetailActivity
 import com.squareup.picasso.Picasso
 
-class WeaponsAdapter(private val weapons:List<Data>): RecyclerView.Adapter<WeaponsAdapter.WeaponsViewHolder>(){
+class WeaponsAdapter(private val weapons:List<Data>, val onClick: (Data) -> Unit): RecyclerView.Adapter<WeaponsAdapter.WeaponsViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeaponsViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        return WeaponsViewHolder(layoutInflater.inflate(R.layout.recycler_weapons_item,parent,false))
+        return WeaponsViewHolder(layoutInflater.inflate(R.layout.recycler_weapons_item,parent,false), onClick = {
+            onClick(it)
+        })
     }
 
     override fun onBindViewHolder(holder: WeaponsViewHolder, position: Int) {
@@ -29,36 +31,17 @@ class WeaponsAdapter(private val weapons:List<Data>): RecyclerView.Adapter<Weapo
         return weapons.size
     }
 
-    inner class WeaponsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
+    inner class WeaponsViewHolder(itemView: View, val onClick: (Data) -> Unit): RecyclerView.ViewHolder(itemView){
         private val binding = RecyclerWeaponsItemBinding.bind(itemView)
-
         fun bind(weapon: Data){
             binding.weaponName.text = weapon.displayName
             Picasso.get().load(weapon.displayIcon).fit().into(binding.weaponImage)
 
-
-
-
-            //Click en un agente para mostrar su info
+            //Click en un arma para mostrar su info
             binding.weaponImage.setOnClickListener(View.OnClickListener {
-
-                val intent = Intent(itemView.context, WeaponDetailActivity::class.java)
-                intent.putExtra("weaponName", weapon.displayName)
-                intent.putExtra("weaponImage", weapon.displayIcon)
-                intent.putExtra("weaponCateg",weapon.category)
-                itemView.context.startActivity(intent,
-                    ActivityOptions.makeSceneTransitionAnimation(itemView.context as Activity?
-                ).toBundle())
-
-
+                onClick(weapon)
             })
-
-
         }
-
     }
-
-
 
 }

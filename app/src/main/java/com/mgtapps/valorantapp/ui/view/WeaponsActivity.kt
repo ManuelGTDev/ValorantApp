@@ -1,5 +1,8 @@
 package com.mgtapps.valorantapp.ui.view
 
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -21,7 +24,6 @@ class WeaponsActivity : AppCompatActivity() {
     private lateinit var adapter: WeaponsAdapter
     private var weapons = mutableListOf<Data>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWeaponsBinding.inflate(layoutInflater)
@@ -36,12 +38,18 @@ class WeaponsActivity : AppCompatActivity() {
 
             initRecyclerView()
         })
-
     }
 
-
     private fun initRecyclerView(){
-        adapter = WeaponsAdapter(weapons)
+        adapter = WeaponsAdapter(weapons, onClick = {weapon ->
+            val intent = Intent(this, WeaponDetailActivity::class.java)
+            intent.putExtra("weaponName", weapon.displayName)
+            intent.putExtra("weaponImage", weapon.displayIcon)
+            intent.putExtra("weaponCateg",weapon.category)
+            startActivity(intent,
+                ActivityOptions.makeSceneTransitionAnimation(this as Activity?
+                ).toBundle())
+        })
         binding.recyclerWeapons.layoutManager = LinearLayoutManager(this)
         binding.recyclerWeapons.adapter = adapter
     }

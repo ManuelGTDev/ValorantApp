@@ -1,6 +1,9 @@
 package com.mgtapps.valorantapp.ui.view
 
 import android.R
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -24,7 +27,8 @@ class AgentesActivity : AppCompatActivity() {
     private lateinit var adapter: AgentsAdapter
     private var agents = mutableListOf<Data>()
 
-    private var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
+    private var linearLayoutManager =
+        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,33 +48,37 @@ class AgentesActivity : AppCompatActivity() {
 
         //Click para el siguiente agente
         binding.buttonAgentsNext.setOnClickListener(View.OnClickListener {
-            binding.recyclerAgents.animation = AnimationUtils.loadAnimation(this,R.anim.fade_in)
+            binding.recyclerAgents.animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
-            if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < adapter.itemCount -1 ){
-                linearLayoutManager.scrollToPosition(linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
-
+            if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < adapter.itemCount - 1) {
+                linearLayoutManager.scrollToPosition(linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1)
             }
         })
 
         //Click para el siguiente agente
         binding.buttonAgentsPrev.setOnClickListener(View.OnClickListener {
-            binding.recyclerAgents.animation = AnimationUtils.loadAnimation(this,R.anim.fade_in)
+            binding.recyclerAgents.animation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
 
-            if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < adapter.itemCount -1 ){
-                linearLayoutManager.scrollToPosition(linearLayoutManager.findLastCompletelyVisibleItemPosition() - 1);
+            if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < adapter.itemCount - 1) {
+                linearLayoutManager.scrollToPosition(linearLayoutManager.findLastCompletelyVisibleItemPosition() - 1)
             }
         })
-
         initRecyclerView()
-
     }
-
-
-
-
-    private fun initRecyclerView(){
-        adapter = AgentsAdapter(agents)
+    private fun initRecyclerView() {
+        adapter = AgentsAdapter(agents) { agent ->
+            val intent = Intent(this, AgentDetailActivity::class.java)
+            intent.putExtra("agentName", agent.displayName)
+            intent.putExtra("agentImage", agent.fullPortraitV2)
+            intent.putExtra("agentDescription", agent.description)
+            startActivity(
+                intent,
+                ActivityOptions.makeSceneTransitionAnimation(
+                    this as Activity?
+                ).toBundle()
+            )
+        }
         binding.recyclerAgents.layoutManager = linearLayoutManager
         binding.recyclerAgents.adapter = adapter
     }
